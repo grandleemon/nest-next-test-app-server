@@ -18,7 +18,7 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
   todos     Todo[]
 }
 
