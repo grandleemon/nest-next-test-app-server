@@ -4,10 +4,13 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from "@nestjs/common";
 import { TodosService } from "./todos.service";
+import { UpdateTodoDto } from "./dto/update-todo.dto";
+import { CreateTodoDto } from "./dto/create-todo.dto";
 
 @Controller({
   path: "todos",
@@ -21,23 +24,23 @@ export class TodosController {
   }
 
   @Post()
-  createTodo(@Body() todoData: { title: string }) {
-    return this.todosService.createTodo(todoData);
+  createTodo(@Body() createTodoDto: CreateTodoDto) {
+    return this.todosService.createTodo(createTodoDto);
   }
 
   @Put(":id")
   updateTodoById(
-    @Param("id") id: string,
-    @Body() todoData: { title: string; finished: boolean },
+    @Param("id", ParseIntPipe) id: number,
+    @Body() updateTodoDto: UpdateTodoDto,
   ) {
     return this.todosService.updateTodoById({
-      where: { id: Number(id) },
-      data: todoData,
+      where: { id },
+      data: updateTodoDto,
     });
   }
 
   @Delete(":id")
-  deleteTodoById(@Param("id") id: string) {
-    return this.todosService.deleteTodoById({ id: Number(id) });
+  deleteTodoById(@Param("id", ParseIntPipe) id: number) {
+    return this.todosService.deleteTodoById({ id });
   }
 }
