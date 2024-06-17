@@ -20,6 +20,7 @@ async function bootstrap() {
     }),
   );
   await app.listen(5555);
+  console.log(`App listening on port ${await app.getUrl()}`);
 }
 
 bootstrap();
