@@ -1,2 +1,11 @@
+echo -e "\n Starting prettier formatting..."
+
 npm run format
+
+echo -e "\n Prettier formatting completed"
+
+echo -e "\n Starting eslint fixing..."
+
 npm run lint
+
+echo -e "\n Eslint fixing completed"
